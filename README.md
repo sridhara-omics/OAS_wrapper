@@ -1,11 +1,10 @@
 # OAS_wrapper
-
-<a target="_blank" href="https://cookiecutter-data-science.drivendata.org/">
-    <img src="https://img.shields.io/badge/CCDS-Project%20template-328F97?logo=cookiecutter" />
-</a>
-
 A wrapper for visualization and basic statiscal analysis of  Observed Antibody Space (OAS) data
 
+## Functionalities
+
+The scripts include functionality to do basic statistics and visualization of the OAS data. In addition, functions to add few relevant columns (i.e., sequence of original VDJ assignments)
+Store VDJ assignments (convert fasta file to map file), and use the mapping to include new column in OAS CSV file. Do this for both heavy and light chains (V/D/J-Heavy and V/J-Light).
 ## Project Organization
 
 ```
