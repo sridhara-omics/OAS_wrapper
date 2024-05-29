@@ -5,6 +5,8 @@ A wrapper for visualization and basic statiscal analysis of  Observed Antibody S
 
 The scripts include functionality to do basic statistics and visualization of the OAS data. In addition, functions to add few relevant columns (i.e., sequence of original VDJ assignments)
 Store VDJ assignments (convert fasta file to map file), and use the mapping to include new column in OAS CSV file. Do this for both heavy and light chains (V/D/J-Heavy and V/J-Light).
+TO DO: (main function)
+Function to query sequence, that gives as output, germline, V/D/J calls, sequences and start/stop, along with FWR1-4, and CDR1-3 information.
 ## Project Organization
 
 ```
