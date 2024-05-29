@@ -1,11 +1,11 @@
 def parse_fasta(file_path):
-    """_summary_
+    """Parse a FASTA file and return a dictionary of gene sequences.
 
     Args:
-        file_path (_type_): _description_
+        file_path (str): Path to the input FASTA file.
 
     Returns:
-        _type_: _description_
+        dict: A dictionary containing gene names as keys and their corresponding sequences as values.
     """
     gene_sequences = {}
     with open(file_path, 'r') as f:
@@ -25,25 +25,33 @@ def parse_fasta(file_path):
     return gene_sequences
 
 def extract_gene_info(defline):
-    """_summary_
+    """Extract gene information from the definition line of a FASTA entry.
 
     Args:
-        defline (_type_): _description_
+        defline (str): The definition line of a FASTA entry.
 
     Returns:
-        _type_: _description_
+        str: The extracted gene information.
     """
     gene_info = defline.split('|')[1]
     return gene_info
 
+def process_fasta_files(file_paths):
+    """Process multiple FASTA files and produce output for each.
+
+    Args:
+        file_paths (list): A list of file paths to input FASTA files.
+    """
+    for file_path in file_paths:
+        gene_sequences = parse_fasta(file_path)
+        output_file = file_path.replace('.fasta', '_sequences.txt')  # Output file name based on input file name
+        with open(output_file, 'w') as file:
+            for gene, sequence in gene_sequences.items():
+                file.write(f"{gene}\t{sequence}\n")
+
 def main():
-    fasta_file = '../refs/imgt_human_IGHV.fasta'  # Replace 'sequences.fasta' with your FASTA file path
-    gene_sequences = parse_fasta(fasta_file)
-    
-    # Output gene+allele information and sequence in two columns
-    print("Gene+Allele\tSequence")
-    for gene, sequence in gene_sequences.items():
-        print(f"{gene}\t{sequence}")
+    fasta_files = ['../refs/imgt_human_IGKJ.fasta', '../refs/imgt_human_IGKV.fasta','../refs/imgt_human_IGLJ.fasta', '../refs/imgt_human_IGLV.fasta']  # Replace with a list of your FASTA file paths
+    process_fasta_files(fasta_files)
 
 if __name__ == "__main__":
     main()
