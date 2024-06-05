@@ -18,8 +18,11 @@ def process_query_sequence(query_sequence, df, v_sequences_df, d_sequences_df, j
     
     # Return relevant fields
     return {
+        'v_call': v_call_heavy,
         'v_sequence': v_sequence,
+        'd_call': d_call_heavy,
         'd_sequence': d_sequence,
+        'j_call': j_call_heavy,
         'j_sequence': j_sequence,
         'sequence_alignment_heavy': sequence_alignment_heavy,
         'germline_alignment_heavy': germline_alignment_heavy
@@ -27,7 +30,11 @@ def process_query_sequence(query_sequence, df, v_sequences_df, d_sequences_df, j
 
 # Example usage
 # Assuming you have loaded your DataFrame and sequences DataFrames (df, v_sequences_df, d_sequences_df, j_sequences_df)
-query_sequence = 'your_query_sequence_here'
+query_sequence = 'TGGGGGACTCCTGTGCCCCACCATGGACACACTTTGCTCCACGCTCCTGCTGCTGATCATCCCTTCATGGGTCTTGTCCCAGATCACCTTGGAGGAGTCTGGTCCTACACTGGTGAAACCCACACAGACCCTCACGCTGACATGCACCTTTTCTGGGTTCTCACTCAGCACTAGTGGAGTGGGTGTGGGCTGGATCCGTCAGCCCCCAGGAAAGGCCCTGGAGTGGCTTGCACTCATTTATTGGGACGGTAATAACCTCTATAGTCCATCTCTGCAGAACAGGCTCACCATCACCAAGGACACCTCCAAAAACCAGGTGGTCCTTACAATGACCAACATGGACCCTATTGACACAGCCACATATTTCTGTGCTCACTTCTCTGCTACTGTGAGTCGGGGATTTATGAATATCAGGAGAAAAAAGCCCCAGAGTTATGACTACTGGGGCCAGGGAAGTCTGGTCACCGTCTCCTCAGCATCCCCGACCAGCCCCAAGGTCTTCCCGCTGAGCCTCTGCAGCACCCAGCCAGATGGGAACGTGGTCATCGCCTGCCTGGTCCAGGGCTTCTTCCCCCAGGAGCCACTCAGTGTGACCTGGAGCGAAAGCGGACAGGGCGTGACCGCCAGAAACTTCCC'
+df = pd.read_csv("../data/1279050_1_Paired_All.csv.gz", low_memory=False, skiprows=1)
+v_sequences_df = pd.read_csv("../refs/imgt_human_IGHV_sequences.txt", names=("v_call", "sequence"), header=None, sep="\t")
+d_sequences_df = pd.read_csv("../refs/imgt_human_IGHD_sequences.txt", names=("d_call", "sequence"), header=None, sep="\t")
+j_sequences_df = pd.read_csv("../refs/imgt_human_IGHJ_sequences.txt", names=("j_call", "sequence"), header=None, sep="\t")
 
 result = process_query_sequence(query_sequence, df, v_sequences_df, d_sequences_df, j_sequences_df)
 print(result)
