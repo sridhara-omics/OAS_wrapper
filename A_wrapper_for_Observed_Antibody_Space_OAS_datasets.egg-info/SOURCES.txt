@@ -1,8 +1,0 @@
-LICENSE
-README.md
-setup.py
-A_wrapper_for_Observed_Antibody_Space_OAS_datasets.egg-info/PKG-INFO
-A_wrapper_for_Observed_Antibody_Space_OAS_datasets.egg-info/SOURCES.txt
-A_wrapper_for_Observed_Antibody_Space_OAS_datasets.egg-info/dependency_links.txt
-A_wrapper_for_Observed_Antibody_Space_OAS_datasets.egg-info/requires.txt
-A_wrapper_for_Observed_Antibody_Space_OAS_datasets.egg-info/top_level.txt
