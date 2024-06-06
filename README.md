@@ -3,10 +3,27 @@ A wrapper for visualization and basic statiscal analysis of  Observed Antibody S
 
 ## Functionalities
 
-The scripts include functionality to do basic statistics and visualization of the OAS data. In addition, functions to add few relevant columns (i.e., sequence of original VDJ assignments)
-Store VDJ assignments (convert fasta file to map file), and use the mapping to include new column in OAS CSV file. Do this for both heavy and light chains (V/D/J-Heavy and V/J-Light).
-TO DO: (main function)
-Function to query sequence, that gives as output, germline, V/D/J calls, sequences and start/stop, along with FWR1-4, and CDR1-3 information.
+The scripts include functionality to do basic statistics and visualization of the OAS data. 
+
+# Column summaries:
+column_summary.py -> Given OAS dataset as input, the function provides basic statistics on the unique and total counts of a column of interest.
+
+```
+# Usage:
+summary_table = column_summary("observed_antibody_space.csv", ["Antibody_ID", "Antigen_Name", "Binding_Affinity"])
+print(summary_table)
+```
+# Length distributions:
+plot_string_length_distribution.py -> Given OAS dataset as input, the function provides basic visualization plots of length distributions of different fields e.g., V, D, J, FWR1-FWR4, CDR1-CDR3 etc.
+
+```
+# Usage: 
+plot_string_length_distribution("observed_antibody_space.csv", ["Antibody_ID", "Antigen_Name", "Binding_Affinity"])
+```
+
+
+tabulate_query_sequence.py -> Given query sequence and IMGT database, the V/D/J sequences along with other relevant information is obtained for the query sequence. 
+
 ## Project Organization
 
 ```
@@ -15,12 +32,6 @@ Function to query sequence, that gives as output, germline, V/D/J calls, sequenc
 ├── data 
 ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
 └── src                <- Source code for use in this project.
-    │
-    ├── main.py    <- Makes OAS_wrapper a Python module
-    │
-    ├── data           <- Scripts to download or generate data
-    │   └── make_dataset.py
-
 ```
 
 --------
