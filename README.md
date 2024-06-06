@@ -21,7 +21,7 @@ plot_string_length_distribution.py -> Given OAS dataset as input, the function p
 plot_string_length_distribution("observed_antibody_space.csv", ["Antibody_ID", "Antigen_Name", "Binding_Affinity"])
 ```
 
-
+## Tabulate results for query sequence:
 tabulate_query_sequence.py -> Given query sequence and IMGT database, the V/D/J sequences along with other relevant information is obtained for the query sequence. 
 
 ```
