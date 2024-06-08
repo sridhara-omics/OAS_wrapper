@@ -1,6 +1,6 @@
 import pandas as pd
 
-def process_query_sequence(query_sequence, df, v_sequences_df, d_sequences_df, j_sequences_df):
+def tabulate_query_sequence(query_sequence, df, v_sequences_df, d_sequences_df, j_sequences_df):
     """ Given a query sequence that is in the dataset, the output is a table that has relevant fields of interest picked from 200 columns of OAS dataset.
     In addition, since the actual V, D and J sequences are absent, and only the identifiers are provided in OAS dataset, we use IMGT table and map the identifier to the sequence and provide the information in the result.
 
@@ -32,6 +32,7 @@ def process_query_sequence(query_sequence, df, v_sequences_df, d_sequences_df, j
     
     # Return relevant fields
     return {
+        'sequence_heavy': query_sequence,
         'v_call': v_call_heavy,
         'v_sequence': v_sequence,
         'd_call': d_call_heavy,
@@ -49,6 +50,5 @@ def process_query_sequence(query_sequence, df, v_sequences_df, d_sequences_df, j
 # v_sequences_df = pd.read_csv("../refs/imgt_human_IGHV_sequences.txt", names=("v_call", "sequence"), header=None, sep="\t")
 # d_sequences_df = pd.read_csv("../refs/imgt_human_IGHD_sequences.txt", names=("d_call", "sequence"), header=None, sep="\t")
 # j_sequences_df = pd.read_csv("../refs/imgt_human_IGHJ_sequences.txt", names=("j_call", "sequence"), header=None, sep="\t")
-
-# result = process_query_sequence(query_sequence, df, v_sequences_df, d_sequences_df, j_sequences_df)
+# result = tabulate_query_sequence(query_sequence, df, v_sequences_df, d_sequences_df, j_sequences_df)
 # print(result)

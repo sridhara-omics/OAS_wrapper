@@ -34,6 +34,6 @@ def column_summary(csv_file, columns_of_interest):
     return summary_df
 
 # Usage:
-# summary_table = column_summary("observed_antibody_space.csv", ["Antibody_ID", "Antigen_Name", "Binding_Affinity"])
+# summary_table = column_summary("observed_antibody_space.csv", ["sequence_heavy", "v_sequence_alignment_heavy", "germline_alignment_heavy"])
 # print(summary_table)
 

@@ -33,4 +33,4 @@ def plot_string_length_distribution(csv_file, columns_of_interest):
     plt.show()
 
 # Example usage
-# plot_string_length_distribution("observed_antibody_space.csv", ["Antibody_ID", "Antigen_Name", "Binding_Affinity"])
+# plot_string_length_distribution("observed_antibody_space.csv", ["sequence_heavy", "v_sequence_alignment_heavy", "germline_alignment_heavy"])
