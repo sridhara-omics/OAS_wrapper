@@ -32,6 +32,7 @@ def tabulate_query_sequence(query_sequence, df, v_sequences_df, d_sequences_df, 
     
     # Return relevant fields
     return {
+        'sequence_heavy': query_sequence,
         'v_call': v_call_heavy,
         'v_sequence': v_sequence,
         'd_call': d_call_heavy,
