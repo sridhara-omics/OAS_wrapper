@@ -22,11 +22,26 @@ def extract_metadata_and_sequences(data_unit_file):
     
     return metadata, sequences
 
+def save_sequences_to_csv(sequences, output_file):
+    """
+    Save sequence data to a CSV file.
+    
+    Parameters:
+        sequences (pd.DataFrame): A DataFrame containing sequence data.
+        output_file (str): Path to the output CSV file.
+    """
+    sequences.to_csv(output_file, index=False)
+    print(f"Sequences saved to {output_file}")
+
 # Example usage
 data_unit_file = "SRR5060321_Heavy_Bulk.csv.gz"
+output_csv_file = "extracted_sequences.csv"
+
+# Extract metadata and sequences
 metadata, sequences = extract_metadata_and_sequences(data_unit_file)
+
+# Save sequences to a CSV file
+save_sequences_to_csv(sequences, output_csv_file)
 
 print("Metadata:")
 print(metadata)
-print("\nSequences:")
-print(sequences.head())
