@@ -1,26 +1,27 @@
 import pandas as pd
 from Bio import pairwise2
-from Bio.pairwise2 import format_alignment
 from colorama import Fore, Style
 
 def highlight_differences(seq1, seq2):
-    """Highlight differences between two sequences using color."""
+    """Highlight differences between two sequences and return indices of differences."""
     highlighted_seq1 = []
     highlighted_seq2 = []
+    difference_indices = []
 
-    for char1, char2 in zip(seq1, seq2):
+    for i, (char1, char2) in enumerate(zip(seq1, seq2)):
         if char1 == char2:
             highlighted_seq1.append(char1)
             highlighted_seq2.append(char2)
         else:
-            # Highlight mismatches in red
+            # Highlight mismatches in red and track their indices
             highlighted_seq1.append(Fore.RED + char1 + Style.RESET_ALL)
             highlighted_seq2.append(Fore.RED + char2 + Style.RESET_ALL)
-    
-    return ''.join(highlighted_seq1), ''.join(highlighted_seq2)
+            difference_indices.append(i)
+
+    return ''.join(highlighted_seq1), ''.join(highlighted_seq2), difference_indices
 
 def align_and_compare_on_row(csv_file, column1, column2, filter_column, target_sequence):
-    """Align sequences in two columns of a specific row based on a filter."""
+    """Align sequences in two columns of a specific row based on a filter and output differences."""
     # Read the CSV file
     df = pd.read_csv(csv_file)
 
@@ -46,8 +47,8 @@ def align_and_compare_on_row(csv_file, column1, column2, filter_column, target_s
 
         aligned_seq1, aligned_seq2 = best_alignment[0], best_alignment[1]
 
-        # Highlight differences
-        highlighted_seq1, highlighted_seq2 = highlight_differences(aligned_seq1, aligned_seq2)
+        # Highlight differences and get indices
+        highlighted_seq1, highlighted_seq2, difference_indices = highlight_differences(aligned_seq1, aligned_seq2)
 
         # Print the results
         print(f"Row {index + 1}:")
@@ -56,9 +57,14 @@ def align_and_compare_on_row(csv_file, column1, column2, filter_column, target_s
         print("Aligned and Highlighted Differences:")
         print(highlighted_seq1)
         print(highlighted_seq2)
+        print(f"Indices of Differences: {difference_indices}")
         print("-" * 50)
 
 # Example usage
 csv_file = "sequences.csv"  # Replace with your CSV file path
 column1 = "Column1"         # Replace with the first column name
-column2 = "Column2"         # Replace with the second column
+column2 = "Column2"         # Replace with the second column name
+filter_column = "FilterColumn"  # Replace with the filter column name
+target_sequence = "GATTACA"  # Replace with the target sequence to filter by
+
+align_and_compare_on_row(csv_file, column1, column2, filter_column, target_sequence)
