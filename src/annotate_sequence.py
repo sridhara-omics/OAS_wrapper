@@ -1,7 +1,7 @@
 import pandas as pd
 
 def annotate_sequence(sequence, annotations):
-    """Annotate a sequence with combined annotations for contiguous regions."""
+    """Annotate a sequence with combined annotations and positional information."""
     # Initialize a list to store annotations for each position
     position_annotations = ["Unannotated"] * len(sequence)
 
@@ -11,24 +11,36 @@ def annotate_sequence(sequence, annotations):
             if 0 <= i < len(sequence):  # Ensure indices are within bounds
                 position_annotations[i] = region
 
-    # Combine contiguous regions with the same annotation
+    # Combine contiguous regions with the same annotation and include positional info
     annotated_sequence = []
     current_annotation = position_annotations[0]
     current_block = sequence[0]
+    block_start = 0
 
     for i in range(1, len(sequence)):
         if position_annotations[i] == current_annotation:
             # Continue the current block
             current_block += sequence[i]
         else:
-            # Save the completed block with annotation
-            annotated_sequence.append(f"{current_block}({current_annotation})")
+            # Save the completed block with annotation and positions
+            if current_annotation != "Unannotated":
+                annotated_sequence.append(
+                    f"{current_block}({current_annotation} {block_start + 1}-{block_start + len(current_block)})"
+                )
+            else:
+                annotated_sequence.append(current_block)
             # Start a new block
             current_annotation = position_annotations[i]
             current_block = sequence[i]
+            block_start = i
 
     # Add the final block
-    annotated_sequence.append(f"{current_block}({current_annotation})")
+    if current_annotation != "Unannotated":
+        annotated_sequence.append(
+            f"{current_block}({current_annotation} {block_start + 1}-{block_start + len(current_block)})"
+        )
+    else:
+        annotated_sequence.append(current_block)
 
     return ''.join(annotated_sequence)
 
