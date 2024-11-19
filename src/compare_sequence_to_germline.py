@@ -19,17 +19,24 @@ def highlight_differences(seq1, seq2):
     
     return ''.join(highlighted_seq1), ''.join(highlighted_seq2)
 
-def align_and_compare(csv_file, column1, column2):
-    """Align sequences in two columns of a CSV file and highlight differences."""
+def align_and_compare_on_row(csv_file, column1, column2, filter_column, target_sequence):
+    """Align sequences in two columns of a specific row based on a filter."""
     # Read the CSV file
     df = pd.read_csv(csv_file)
 
     # Check if specified columns exist
-    if column1 not in df.columns or column2 not in df.columns:
-        raise ValueError(f"Columns '{column1}' and/or '{column2}' not found in the CSV.")
+    if column1 not in df.columns or column2 not in df.columns or filter_column not in df.columns:
+        raise ValueError(f"Specified columns not found in the CSV.")
 
-    # Iterate over rows and align sequences
-    for index, row in df.iterrows():
+    # Filter the row where the filter column matches the target sequence
+    filtered_df = df[df[filter_column] == target_sequence]
+
+    if filtered_df.empty:
+        print(f"No rows found where {filter_column} matches '{target_sequence}'.")
+        return
+
+    # Iterate over the filtered rows (there could be more than one match)
+    for index, row in filtered_df.iterrows():
         seq1 = row[column1]
         seq2 = row[column2]
         
@@ -54,5 +61,4 @@ def align_and_compare(csv_file, column1, column2):
 # Example usage
 csv_file = "sequences.csv"  # Replace with your CSV file path
 column1 = "Column1"         # Replace with the first column name
-column2 = "Column2"         # Replace with the second column name
-align_and_compare(csv_file, column1, column2)
+column2 = "Column2"         # Replace with the second column
