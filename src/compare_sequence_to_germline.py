@@ -20,8 +20,34 @@ def highlight_differences(seq1, seq2):
 
     return ''.join(highlighted_seq1), ''.join(highlighted_seq2), difference_indices
 
-def align_and_compare_on_row(csv_file, column1, column2, filter_column, target_sequence):
-    """Align sequences in two columns of a specific row based on a filter and output differences."""
+def map_indices_to_regions(difference_indices, row):
+    """Map difference indices to annotated regions."""
+    mapped_regions = []
+
+    for index in difference_indices:
+        region_found = False
+        for region in ['CDR1', 'CDR2', 'CDR3']:
+            start_col = f"{region}_start"
+            end_col = f"{region}_end"
+
+            # Check if the index is within the region
+            if start_col in row and end_col in row:
+                start = int(row[start_col])
+                end = int(row[end_col])
+
+                if start <= index <= end:
+                    mapped_regions.append((index, region))
+                    region_found = True
+                    break
+
+        # If no region matched, append "Unmapped"
+        if not region_found:
+            mapped_regions.append((index, "Unmapped"))
+
+    return mapped_regions
+
+def align_and_compare_with_annotations(csv_file, column1, column2, filter_column, target_sequence):
+    """Align sequences, find differences, and map them to regions based on annotations."""
     # Read the CSV file
     df = pd.read_csv(csv_file)
 
@@ -50,6 +76,9 @@ def align_and_compare_on_row(csv_file, column1, column2, filter_column, target_s
         # Highlight differences and get indices
         highlighted_seq1, highlighted_seq2, difference_indices = highlight_differences(aligned_seq1, aligned_seq2)
 
+        # Map indices to regions
+        mapped_regions = map_indices_to_regions(difference_indices, row)
+
         # Print the results
         print(f"Row {index + 1}:")
         print(f"Original Sequence 1: {seq1}")
@@ -58,13 +87,14 @@ def align_and_compare_on_row(csv_file, column1, column2, filter_column, target_s
         print(highlighted_seq1)
         print(highlighted_seq2)
         print(f"Indices of Differences: {difference_indices}")
+        print(f"Mapped Regions: {mapped_regions}")
         print("-" * 50)
 
 # Example usage
-csv_file = "sequences.csv"  # Replace with your CSV file path
-column1 = "Column1"         # Replace with the first column name
-column2 = "Column2"         # Replace with the second column name
-filter_column = "FilterColumn"  # Replace with the filter column name
-target_sequence = "GATTACA"  # Replace with the target sequence to filter by
+csv_file = "sequences_with_annotations.csv"  # Replace with your CSV file path
+column1 = "Column1"                          # Replace with the first column name
+column2 = "Column2"                          # Replace with the second column name
+filter_column = "FilterColumn"               # Replace with the filter column name
+target_sequence = "GATTACA"                  # Replace with the target sequence to filter by
 
-align_and_compare_on_row(csv_file, column1, column2, filter_column, target_sequence)
+align_and_compare_with_annotations(csv_file, column1, column2, filter_column, target_sequence)
