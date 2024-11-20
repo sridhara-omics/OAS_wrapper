@@ -1,5 +1,5 @@
 # OAS_wrapper
-A wrapper for visualization and basic statiscal analysis of  Observed Antibody Space (OAS) data.
+A wrapper to parse Observed Antibody Space (OAS) data for better visualization, annotation and comparison of sequence to germline.
 
 ## Functionalities
 
