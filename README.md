@@ -39,6 +39,8 @@ print(result)
 ```
 
 ```
+## Align sequence and germline and identify mismatches
+
 Row 1:
 Original Sequence 1: ATGCCGT
 Original Sequence 2: ATGTCGT
@@ -53,6 +55,7 @@ For the example above, the mismatch at position 3 (0-based index) is highlighted
 ```
 
 ```
+## Annotate sequence with CDRs and FWRs and other fields that are present in OAS
 Row 1:
 Original Sequence: ATGCCGTAACTG
 Annotated Sequence: A(Unannotated)TG(CDR1 2-3)CCG(FWR1 4-6)TA(CDR2 7-8)AC(FWR2 9-10)TG(CDR3 11-12)
@@ -74,7 +77,7 @@ Regions marked as Unannotated are left as-is without appending positional inform
 ```
 
 ```
-Function Parameters:
+## Separate original OAS data file into metadata and sequences data
 
 data_unit_file: The path to the gzipped CSV file.
 Metadata Extraction:
@@ -89,7 +92,7 @@ The index=False parameter ensures that the DataFrame's index is not written to t
 ```
 
 ```
-Grouping by Germline:
+## Grouping by Germline
 
 Use groupby to group sequences by germline.
 Create a list of sequences for each germline and count the number of sequences.
