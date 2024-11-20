@@ -19,6 +19,14 @@ Mapped Regions: [(3, 'CDR2')]
 --------------------------------------------------
 ```
 5. Group data by germline, to infer sequences that originate from germline, including providing information on V, D and J annotations
+```
+    germline,number_of_sequences,sequence,v_call,d_call,j_call,quality,source
+IGHV1-69,3,ATGC,IGHV1,IGHD2,IGHJ4,High,Lab1
+IGHV1-69,3,GCTA,IGHV1,IGHD2,IGHJ4,Medium,Lab2
+IGHV1-69,3,ATGC,IGHV1,IGHD2,IGHJ4,High,Lab1
+IGHV3-23,2,TAGC,IGHV3,IGHD3,IGHJ5,Low,Lab3
+IGHV3-23,2,GCAT,IGHV3,IGHD3,IGHJ5,Medium,Lab2
+```
    
 7. Annotate sequence with CDRs and FWRs for easy inference of regions of interest
 ```
