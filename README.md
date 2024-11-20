@@ -38,7 +38,70 @@ print(result)
 
 ```
 
+```
+Row 1:
+Original Sequence 1: ATGCCGT
+Original Sequence 2: ATGTCGT
+Aligned and Highlighted Differences:
+ATGC[RED]C[/RED]GT
+ATG[RED]T[/RED]CGT
+Indices of Differences: [3]
+--------------------------------------------------
+Explanation of Output:
+The script aligns the sequences, highlights mismatches, and outputs the indices where they occur.
+For the example above, the mismatch at position 3 (0-based index) is highlighted and its index is printed.
+```
 
+```
+Row 1:
+Original Sequence: ATGCCGTAACTG
+Annotated Sequence: A(Unannotated)TG(CDR1 2-3)CCG(FWR1 4-6)TA(CDR2 7-8)AC(FWR2 9-10)TG(CDR3 11-12)
+--------------------------------------------------
+Row 2:
+Original Sequence: GATTACAGTGCTA
+Annotated Sequence: GAT(CDR1 1-3)TAC(FWR1 4-6)AG(CDR2 7-8)TG(FWR2 9-10)CTA(CDR3 11-13)
+--------------------------------------------------
+
+Including Positional Information:
+
+When saving a completed block, the start and end positions of the block are included alongside the region name in the format (Region Start-End).
+Dynamic Block Start:
+
+A block_start variable tracks the starting position of each block, ensuring accurate positional reporting.
+Simplified Handling of Unannotated Regions:
+
+Regions marked as Unannotated are left as-is without appending positional information.
+```
+
+```
+Function Parameters:
+
+data_unit_file: The path to the gzipped CSV file.
+Metadata Extraction:
+
+The metadata is extracted from the column headers (first row of the CSV). It is read as a single row and parsed into a JSON object.
+Sequence Extraction:
+
+The sequence data is extracted from the remaining rows (starting from the second row).
+
+Saves the sequences DataFrame to a CSV file using pandas.DataFrame.to_csv.
+The index=False parameter ensures that the DataFrame's index is not written to the CSV file.
+```
+
+```
+Grouping by Germline:
+
+Use groupby to group sequences by germline.
+Create a list of sequences for each germline and count the number of sequences.
+Handling Redundancy:
+
+Use explode to expand the lists of sequences back into individual rows, allowing redundancy in germline and number_of_sequences.
+Output CSV: The output CSV contains:
+
+germline: Germline identifier.
+number_of_sequences: Number of sequences mapped to the germline.
+sequence: A sequence mapped to the germline.
+```
 
 ## Project Organization
 
