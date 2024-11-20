@@ -5,7 +5,10 @@ setup(
     version='0.1',
     packages=find_packages(),
     install_requires=[
-        'pandas'
+        'numpy',
+        'scipy',
+        'pandas',
+        'Bio'
         # Add other dependencies as needed
     ],
     author='Viswanadham Sridhara',
