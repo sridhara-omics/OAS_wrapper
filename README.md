@@ -7,7 +7,7 @@ The scripts include functionalities to:
 1. Parse raw OAS data into metadata and antibody sequence data
 2. Provide basic metrics and visualizations of sequences and their annotations
 3. Align sequence and germline to highlight regions of mismatches, providing positional information
-4. Group data by germline, to infer sequences that original from them, including information on V, D and J annotations
+4. Group data by germline, to infer sequences that originate from germline, including providing information on V, D and J annotations
 5. Annotate sequence with CDRs and FWRs for easy inference of regions of interest 
 
 ## Project Organization
