@@ -8,9 +8,9 @@ The scripts include functionalities to:
 2. Provide original IMGT sequences for V, D and J calls made in OAS data using IMGT reference database
 3. Align sequence and germline to highlight regions of mismatches, providing positional information e.g.,  
 ```
-   Row 1:  
-Original Sequence 1: ATGCCGT  
-Original Sequence 2: ATGTCGT  
+Example Output:  
+Sequence: ATGCCGT  
+Germline: ATGTCGT  
 Aligned and Highlighted Differences:  
 ATGC[RED]C[/RED]GT  
 ATG[RED]T[/RED]CGT  
@@ -20,7 +20,8 @@ Mapped Regions: [(3, 'CDR2')]
 ```
 5. Group data by germline, to infer sequences that originate from germline, including providing information on V, D and J annotations
 ```
-    germline,number_of_sequences,sequence,v_call,d_call,j_call,quality,source
+Example Output:
+germline,number_of_sequences,sequence,v_call,d_call,j_call,quality,source
 IGHV1-69,3,ATGC,IGHV1,IGHD2,IGHJ4,High,Lab1
 IGHV1-69,3,GCTA,IGHV1,IGHD2,IGHJ4,Medium,Lab2
 IGHV1-69,3,ATGC,IGHV1,IGHD2,IGHJ4,High,Lab1
@@ -30,7 +31,7 @@ IGHV3-23,2,GCAT,IGHV3,IGHD3,IGHJ5,Medium,Lab2
    
 7. Annotate sequence with CDRs and FWRs for easy inference of regions of interest
 ```
-   Row 1:  
+Example Output:  
 Original Sequence: ATGCCGTAACTG  
 Annotated Sequence: A(Unannotated)T(CDR1)GC(FWR1)GT(CDR2)AA(FWR2)CT(CDR3)G(Unannotated)  
 --------------------------------------------------  
