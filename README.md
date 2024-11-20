@@ -5,6 +5,24 @@ A wrapper for visualization and basic statiscal analysis of  Observed Antibody S
 
 The scripts include functionality to do basic statistics and visualization of the OAS data. 
 
+## Separate original OAS data file into metadata and sequences data
+
+```
+Sample output
+
+data_unit_file: The path to the gzipped CSV file.
+Metadata Extraction:
+
+The metadata is extracted from the column headers (first row of the CSV). It is read as a single row and parsed into a JSON object.
+Sequence Extraction:
+
+The sequence data is extracted from the remaining rows (starting from the second row).
+
+Saves the sequences DataFrame to a CSV file using pandas.DataFrame.to_csv.
+The index=False parameter ensures that the DataFrame's index is not written to the CSV file.
+```
+
+
 ## Column summaries:
 column_summary.py -> Given OAS dataset as input, the function provides basic statistics on the unique and total counts of a column of interest.
 
@@ -78,22 +96,6 @@ A block_start variable tracks the starting position of each block, ensuring accu
 Simplified Handling of Unannotated Regions:
 
 Regions marked as Unannotated are left as-is without appending positional information.
-```
-## Separate original OAS data file into metadata and sequences data
-
-```
-Sample output
-
-data_unit_file: The path to the gzipped CSV file.
-Metadata Extraction:
-
-The metadata is extracted from the column headers (first row of the CSV). It is read as a single row and parsed into a JSON object.
-Sequence Extraction:
-
-The sequence data is extracted from the remaining rows (starting from the second row).
-
-Saves the sequences DataFrame to a CSV file using pandas.DataFrame.to_csv.
-The index=False parameter ensures that the DataFrame's index is not written to the CSV file.
 ```
 ## Grouping by Germline
 
