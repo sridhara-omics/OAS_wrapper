@@ -37,9 +37,10 @@ result = process_query_sequence(query_sequence, df, v_sequences_df, d_sequences_
 print(result)
 
 ```
+## Align sequence to germline and identify mismatches
 
 ```
-## Align sequence and germline and identify mismatches
+Sample output:
 
 Row 1:
 Original Sequence 1: ATGCCGT
@@ -54,8 +55,11 @@ The script aligns the sequences, highlights mismatches, and outputs the indices 
 For the example above, the mismatch at position 3 (0-based index) is highlighted and its index is printed.
 ```
 
-```
 ## Annotate sequence with CDRs and FWRs and other fields that are present in OAS
+
+```
+Sample output
+
 Row 1:
 Original Sequence: ATGCCGTAACTG
 Annotated Sequence: A(Unannotated)TG(CDR1 2-3)CCG(FWR1 4-6)TA(CDR2 7-8)AC(FWR2 9-10)TG(CDR3 11-12)
@@ -75,9 +79,10 @@ Simplified Handling of Unannotated Regions:
 
 Regions marked as Unannotated are left as-is without appending positional information.
 ```
+## Separate original OAS data file into metadata and sequences data
 
 ```
-## Separate original OAS data file into metadata and sequences data
+Sample output
 
 data_unit_file: The path to the gzipped CSV file.
 Metadata Extraction:
@@ -90,9 +95,10 @@ The sequence data is extracted from the remaining rows (starting from the second
 Saves the sequences DataFrame to a CSV file using pandas.DataFrame.to_csv.
 The index=False parameter ensures that the DataFrame's index is not written to the CSV file.
 ```
+## Grouping by Germline
 
 ```
-## Grouping by Germline
+Sample output
 
 Use groupby to group sequences by germline.
 Create a list of sequences for each germline and count the number of sequences.
