@@ -1,5 +1,5 @@
 # OAS_wrapper
-A wrapper for visualization and basic statiscal analysis of  Observed Antibody Space (OAS) data.
+A wrapper to parse Observed Antibody Space (OAS) data for better visualization, annotation and comparison of sequence to germline.
 
 ## Functionalities
 
@@ -9,8 +9,11 @@ The scripts include functionalities to:
 3. Align sequence and germline to highlight regions of mismatches, providing positional information
 4. Group data by germline, to infer sequences that original from them, including information on V, D and J annotations
 5. Annotate sequence with CDRs and FWRs for easy inference of regions of interest 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> be6b14f23876f49b6b49d586739ddbed30aa4b6b
 
 ## Project Organization
 
