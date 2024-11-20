@@ -6,8 +6,22 @@ A wrapper for visualization and basic statiscal analysis of  Observed Antibody S
 The scripts include functionality to do basic statistics and visualization of the OAS data. 
 
 ## Separate original OAS data file into metadata and sequences data
-
+metadata_sequences.py -> Given original OAS data file, the script separates the data file into metadata file and the sequences data frame.
 ```
+Usage:
+# Example usage
+data_unit_file = "SRR5060321_Heavy_Bulk.csv.gz"
+output_csv_file = "extracted_sequences.csv"
+
+# Extract metadata and sequences
+metadata, sequences = extract_metadata_and_sequences(data_unit_file)
+
+# Save sequences to a CSV file
+save_sequences_to_csv(sequences, output_csv_file)
+
+print("Metadata:")
+print(metadata)
+
 Sample output
 
 data_unit_file: The path to the gzipped CSV file.
@@ -56,8 +70,11 @@ print(result)
 
 ```
 ## Align sequence to germline and identify mismatches
-
+compare_sequence_to_germline.py -> Given OAS data, the script aligns the sequence to germline, and highlights the regions that are different, giving both positional information of mismatches along with highlighting regions of mismatches.
 ```
+Usage:
+align_and_compare_on_row("sequences.csv", "Column1", "Column2", "FilterColumn", "GATTACA")
+
 Sample output:
 
 Row 1:
@@ -71,11 +88,17 @@ Indices of Differences: [3]
 Explanation of Output:
 The script aligns the sequences, highlights mismatches, and outputs the indices where they occur.
 For the example above, the mismatch at position 3 (0-based index) is highlighted and its index is printed.
+
+
 ```
 
 ## Annotate sequence with CDRs and FWRs and other fields that are present in OAS
-
+annotate_sequence.py -> Given OAS data file, the script annotates sequences explicitly with CDR and FWR regions.
 ```
+Usage:
+csv_file = "sequence_annotations.csv"  # Replace with your CSV file path
+annotate_from_csv(csv_file)
+
 Sample output
 
 Row 1:
@@ -98,8 +121,14 @@ Simplified Handling of Unannotated Regions:
 Regions marked as Unannotated are left as-is without appending positional information.
 ```
 ## Grouping by Germline
-
+germline_to_sequence_mappings.py -> Given the OAS data, group the data by germline sequence to see how many sequences originate from germline, along with the VDJ annotations/calls.
 ```
+Usage:
+# Example usage
+input_csv = "germline_sequences_with_calls.csv"
+output_csv = "processed_germline_mappings_with_calls.csv"
+process_germline_mappings_with_calls(input_csv, output_csv)
+
 Sample output
 
 Use groupby to group sequences by germline.
