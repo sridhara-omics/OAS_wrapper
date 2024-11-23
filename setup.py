@@ -5,9 +5,10 @@ setup(
     version='0.1',
     packages=find_packages(),
     install_requires=[
-        'numpy',
+        'numpy<2',
         'scipy',
         'pandas',
+        'matplotlib',
         'Bio'
         # Add other dependencies as needed
     ],

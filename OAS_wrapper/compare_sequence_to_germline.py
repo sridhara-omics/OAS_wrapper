@@ -1,12 +1,16 @@
 import pandas as pd
-from Bio import pairwise2
-from colorama import Fore, Style
+from Bio.Align import PairwiseAligner
+
 
 def highlight_differences(seq1, seq2):
-    """Highlight differences between two sequences and return indices of differences."""
+    """Highlight differences between two sequences using ANSI escape codes and return indices of differences."""
     highlighted_seq1 = []
     highlighted_seq2 = []
     difference_indices = []
+
+    # ANSI color codes
+    RED = '\033[31m'  # Red color
+    RESET = '\033[0m'  # Reset to default
 
     for i, (char1, char2) in enumerate(zip(seq1, seq2)):
         if char1 == char2:
@@ -14,8 +18,8 @@ def highlight_differences(seq1, seq2):
             highlighted_seq2.append(char2)
         else:
             # Highlight mismatches in red and track their indices
-            highlighted_seq1.append(Fore.RED + char1 + Style.RESET_ALL)
-            highlighted_seq2.append(Fore.RED + char2 + Style.RESET_ALL)
+            highlighted_seq1.append(f"{RED}{char1}{RESET}")
+            highlighted_seq2.append(f"{RED}{char2}{RESET}")
             difference_indices.append(i)
 
     return ''.join(highlighted_seq1), ''.join(highlighted_seq2), difference_indices
@@ -62,16 +66,22 @@ def align_and_compare_with_annotations(csv_file, column1, column2, filter_column
         print(f"No rows found where {filter_column} matches '{target_sequence}'.")
         return
 
+    # Initialize the aligner
+    aligner = PairwiseAligner()
+    aligner.mode = "global"  # You can set to "local" if needed
+
     # Iterate over the filtered rows (there could be more than one match)
     for index, row in filtered_df.iterrows():
         seq1 = row[column1]
         seq2 = row[column2]
         
-        # Perform global alignment
-        alignments = pairwise2.align.globalxx(seq1, seq2)
+        # Perform alignment
+        alignments = aligner.align(seq1, seq2)
         best_alignment = alignments[0]
 
-        aligned_seq1, aligned_seq2 = best_alignment[0], best_alignment[1]
+        # Extract aligned sequences
+        aligned_seq1 = best_alignment.target
+        aligned_seq2 = best_alignment.query
 
         # Highlight differences and get indices
         highlighted_seq1, highlighted_seq2, difference_indices = highlight_differences(aligned_seq1, aligned_seq2)
@@ -90,11 +100,11 @@ def align_and_compare_with_annotations(csv_file, column1, column2, filter_column
         print(f"Mapped Regions: {mapped_regions}")
         print("-" * 50)
 
-""" # Example usage
-csv_file = "sequences_with_annotations.csv"  # Replace with your CSV file path
-column1 = "Column1"                          # Replace with the first column name
-column2 = "Column2"                          # Replace with the second column name
-filter_column = "FilterColumn"               # Replace with the filter column name
-target_sequence = "GATTACA"                  # Replace with the target sequence to filter by
+# Example usage
+# csv_file = "sequences_with_annotations.csv"  # Replace with your CSV file path
+# column1 = "Column1"                          # Replace with the first column name
+# column2 = "Column2"                          # Replace with the second column name
+# filter_column = "FilterColumn"               # Replace with the filter column name
+# target_sequence = "GATTACA"                  # Replace with the target sequence to filter by
 
-align_and_compare_with_annotations(csv_file, column1, column2, filter_column, target_sequence) """
+# align_and_compare_with_annotations(csv_file, column1, column2, filter_column, target_sequence)
