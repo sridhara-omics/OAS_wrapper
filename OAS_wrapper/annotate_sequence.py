@@ -82,6 +82,6 @@ def annotate_from_csv(csv_file):
         print(f"Annotated Sequence: {annotated_sequence}")
         print("-" * 50)
 
-# Example usage
+""" # Example usage
 csv_file = "sequence_annotations.csv"  # Replace with your CSV file path
-annotate_from_csv(csv_file)
+annotate_from_csv(csv_file) """

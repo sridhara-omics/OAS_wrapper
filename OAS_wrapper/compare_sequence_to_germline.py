@@ -90,11 +90,11 @@ def align_and_compare_with_annotations(csv_file, column1, column2, filter_column
         print(f"Mapped Regions: {mapped_regions}")
         print("-" * 50)
 
-# Example usage
+""" # Example usage
 csv_file = "sequences_with_annotations.csv"  # Replace with your CSV file path
 column1 = "Column1"                          # Replace with the first column name
 column2 = "Column2"                          # Replace with the second column name
 filter_column = "FilterColumn"               # Replace with the filter column name
 target_sequence = "GATTACA"                  # Replace with the target sequence to filter by
 
-align_and_compare_with_annotations(csv_file, column1, column2, filter_column, target_sequence)
+align_and_compare_with_annotations(csv_file, column1, column2, filter_column, target_sequence) """
