@@ -41,7 +41,8 @@ def process_germline_mappings_with_calls(input_csv, output_csv):
     result.to_csv(output_csv, index=False)
     print(f"Processed data saved to {output_csv}")
 
-# Example usage
+""" # Example usage
 input_csv = "germline_sequences_with_calls.csv"
 output_csv = "processed_germline_mappings_with_calls.csv"
 process_germline_mappings_with_calls(input_csv, output_csv)
+ """

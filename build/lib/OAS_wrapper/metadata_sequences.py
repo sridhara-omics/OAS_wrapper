@@ -33,8 +33,8 @@ def save_sequences_to_csv(sequences, output_file):
     sequences.to_csv(output_file, index=False)
     print(f"Sequences saved to {output_file}")
 
-# Example usage
-data_unit_file = "SRR5060321_Heavy_Bulk.csv.gz"
+""" # Example usage
+data_unit_file = "../data/sample.csv"
 output_csv_file = "extracted_sequences.csv"
 
 # Extract metadata and sequences
@@ -45,3 +45,4 @@ save_sequences_to_csv(sequences, output_csv_file)
 
 print("Metadata:")
 print(metadata)
+ """
