@@ -1,7 +1,7 @@
 Metadata-Version: 2.1
 Name: OAS_wrapper
-Version: 0.1
-Summary: The OAS_wrapper package provides functionalities to get basic statistics and visualizations for the OAS dataset of interest. In addition, the actual V/D/J sequencese are mapped from the IMGT database for a query sequence of interest.
+Version: 1.0
+Summary: Python package to parse Observed antibody sequence data for easy reporting, visualization, annotation and alignment.
 Home-page: https://github.com/sridhara-omics/OAS_wrapper
 Author: Viswanadham Sridhara
 Author-email: Sridhara.Utils@gmail.com
@@ -11,7 +11,7 @@ Classifier: License :: OSI Approved :: MIT License
 Classifier: Programming Language :: Python :: 3.9
 Description-Content-Type: text/markdown
 License-File: LICENSE
-Requires-Dist: numpy<2
+Requires-Dist: numpy
 Requires-Dist: scipy
 Requires-Dist: pandas
 Requires-Dist: matplotlib

@@ -1,6 +1,6 @@
 import pandas as pd
 
-def process_germline_mappings_with_calls(input_csv, output_csv):
+def process_germline_mappings_with_calls(data_unit_file, output_csv):
     """
     Process germline mappings from a CSV file and generate a new CSV file with 
     germline, the number of sequences mapped, and sequences, while preserving 
@@ -12,7 +12,7 @@ def process_germline_mappings_with_calls(input_csv, output_csv):
         output_csv (str): Path to the output CSV file to save the processed data.
     """
     # Read the input CSV
-    df = pd.read_csv(input_csv)
+    df = pd.read_csv(data_unit_file, low_memory=False, skiprows=1)
     
     # Validate that necessary columns exist
     required_columns = {"sequence", "germline", "v_call", "d_call", "j_call"}

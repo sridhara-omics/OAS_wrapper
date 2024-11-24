@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-def plot_string_length_distribution(csv_file, columns_of_interest):
+def plot_string_length_distribution(data_unit_file, columns_of_interest):
     """
     Read Observed Antibody Space CSV data and plot distributions of string lengths for selected columns.
     
@@ -10,7 +10,7 @@ def plot_string_length_distribution(csv_file, columns_of_interest):
         columns_of_interest (list): List of column names to plot distributions for.
     """
     # Read the CSV file into a DataFrame
-    data = pd.read_csv(csv_file, skiprows=1, low_memory=False)
+    data = pd.read_csv(data_unit_file, skiprows=1, low_memory=False)
     
     # Iterate over each column of interest
     for column in columns_of_interest:

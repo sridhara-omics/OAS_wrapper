@@ -57,10 +57,10 @@ def get_annotations(row):
                 annotations[region_name] = (int(row[start_col]), int(row[end_col]))
     return annotations
 
-def annotate_from_csv(csv_file):
+def annotate_from_csv(data_unit_file):
     """Annotate sequences based on regions from a CSV file."""
     # Read the CSV file
-    df = pd.read_csv(csv_file)
+    df = pd.read_csv(data_unit_file, low_memory=False, skiprows=1)
 
     # Check for mandatory Sequence column
     if "Sequence" not in df.columns:

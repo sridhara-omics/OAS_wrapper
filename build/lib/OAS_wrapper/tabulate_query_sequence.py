@@ -1,6 +1,6 @@
 import pandas as pd
 
-def tabulate_query_sequence(query_sequence, df, v_sequences_df, d_sequences_df, j_sequences_df):
+def tabulate_query_sequence(query_sequence, data_unit_file, v_sequences_df, d_sequences_df, j_sequences_df):
     """ Given a query sequence that is in the dataset, the output is a table that has relevant fields of interest picked from 200 columns of OAS dataset.
     In addition, since the actual V, D and J sequences are absent, and only the identifiers are provided in OAS dataset, we use IMGT table and map the identifier to the sequence and provide the information in the result.
 
@@ -16,6 +16,7 @@ def tabulate_query_sequence(query_sequence, df, v_sequences_df, d_sequences_df, 
         _type_: List that has the information filtered out from a large subset of columns, along with V/D/J sequences mapped to original IMGT database.
     """
     # Find the row that matches the input query sequence
+    df = pd.read_csv(data_unit_file, low_memory=False, skiprows=1)
     matched_row = df[df['sequence_heavy'] == query_sequence].iloc[0]
     
     # Read relevant data from the matched row

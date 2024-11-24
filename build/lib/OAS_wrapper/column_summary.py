@@ -1,6 +1,6 @@
 import pandas as pd
 
-def column_summary(csv_file, columns_of_interest):
+def column_summary(data_unit_file, columns_of_interest):
     """
     Read Observed Antibody Space CSV data and generate a summary table for selected columns.
     
@@ -12,7 +12,7 @@ def column_summary(csv_file, columns_of_interest):
         pandas.DataFrame: Summary table containing column name, total count, and unique count.
     """
     # Read the CSV file into a DataFrame
-    data = pd.read_csv(csv_file, skiprows=1, low_memory=False)
+    data = pd.read_csv(data_unit_file, skiprows=1, low_memory=False)
     
     # Initialize an empty list to store summary information
     summary = []
