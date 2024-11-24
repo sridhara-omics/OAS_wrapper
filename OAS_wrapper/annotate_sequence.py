@@ -57,8 +57,18 @@ def get_annotations(row):
                 annotations[region_name] = (int(row[start_col]), int(row[end_col]))
     return annotations
 
-def annotate_from_csv(data_unit_file, sequence_col):
-    """Annotate sequences based on regions from a CSV file."""
+def annotate_query_sequence(data_unit_file, sequence_col, query_sequence):
+    """
+    Annotate a query sequence based on matching row in a CSV file.
+    
+    Parameters:
+        data_unit_file (str): Path to the input CSV file.
+        sequence_col (str): Name of the column containing sequences.
+        query_sequence (str): The sequence to annotate.
+        
+    Returns:
+        str: Annotated query sequence.
+    """
     # Read the CSV file
     df = pd.read_csv(data_unit_file, low_memory=False, skiprows=1)
 
@@ -66,23 +76,30 @@ def annotate_from_csv(data_unit_file, sequence_col):
     if sequence_col not in df.columns:
         raise ValueError(f"CSV file must contain a '{sequence_col}' column.")
 
-    # Process each row
-    for index, row in df.iterrows():
-        sequence = row[sequence_col]
+    # Find the row matching the query sequence
+    matching_rows = df[df[sequence_col] == query_sequence]
 
-        # Extract annotation regions dynamically
-        annotations = get_annotations(row)
+    if matching_rows.empty:
+        raise ValueError("Query sequence not found in the dataset.")
 
-        # Annotate the sequence
-        annotated_sequence = annotate_sequence(sequence, annotations)
+    # There could be multiple matches; we'll use the first one
+    row = matching_rows.iloc[0]
 
-        # Print the results
-        print(f"Row {index + 1}:")
-        print(f"Original Sequence: {sequence}")
-        print(f"Annotated Sequence: {annotated_sequence}")
-        print("-" * 50)
+    # Extract annotation regions dynamically
+    annotations = get_annotations(row)
+
+    # Annotate the query sequence
+    annotated_sequence = annotate_sequence(query_sequence, annotations)
+
+    # Return the annotated sequence
+    return annotated_sequence
 
 """ # Example usage
 csv_file = "sequence_annotations.csv"  # Replace with your CSV file path
 sequence_column = "Sequence"  # Replace with the column name in your CSV
-annotate_from_csv(csv_file, sequence_column) """
+query_sequence = "ACTGACTGACTG"  # Replace with your query sequence
+
+annotated_sequence = annotate_query_sequence(csv_file, sequence_column, query_sequence)
+print("Annotated Sequence:")
+print(annotated_sequence)
+"""
