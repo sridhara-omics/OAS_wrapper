@@ -1,4 +1,5 @@
 import pandas as pd
+import re
 
 def annotate_sequence(sequence, annotations):
     """Annotate a sequence with combined annotations and positional information."""
@@ -45,13 +46,21 @@ def annotate_sequence(sequence, annotations):
     return ''.join(annotated_sequence)
 
 def get_annotations(row):
-    """Extract annotation regions dynamically from a row."""
+    """
+    Extract annotation regions dynamically from a row based on 
+    column naming patterns like 'cdr*_start*', where:
+    - The first '*' represents a number.
+    - The second '*' can be blank or a string.
+    """
     annotations = {}
     for col_name in row.index:
-        if "_start" in col_name:
-            region_name = col_name.replace("_start", "")
+        # Match columns like 'cdr*_start*'
+        match = re.match(r"cdr\d+_start.*", col_name)
+        if match:
+            region_name = col_name.split("_start")[0]  # Extract region name (e.g., 'cdr1', 'cdr12')
             start_col = col_name
-            end_col = f"{region_name}_end"
+            # Find the corresponding end column
+            end_col = col_name.replace("_start", "_end")
 
             if end_col in row:
                 annotations[region_name] = (int(row[start_col]), int(row[end_col]))
