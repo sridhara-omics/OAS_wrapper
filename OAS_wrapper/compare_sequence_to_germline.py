@@ -50,10 +50,10 @@ def map_indices_to_regions(difference_indices, row):
 
     return mapped_regions
 
-def align_and_compare_with_annotations(csv_file, column1, column2, filter_column, target_sequence):
+def align_and_compare_with_annotations(data_unit_file, column1, column2, filter_column, target_sequence):
     """Align sequences, find differences, and map them to regions based on annotations."""
     # Read the CSV file
-    df = pd.read_csv(csv_file)
+    df = pd.read_csv(data_unit_file, low_memory=False, skiprows=1)
 
     # Check if specified columns exist
     if column1 not in df.columns or column2 not in df.columns or filter_column not in df.columns:

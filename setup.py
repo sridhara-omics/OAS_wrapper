@@ -2,10 +2,10 @@ from setuptools import setup, find_packages
 
 setup(
     name='OAS_wrapper',
-    version='0.1',
+    version='1.0',
     packages=find_packages(),
     install_requires=[
-        'numpy<2',
+        'numpy',
         'scipy',
         'pandas',
         'matplotlib',
@@ -14,7 +14,7 @@ setup(
     ],
     author='Viswanadham Sridhara',
     author_email='Sridhara.Utils@gmail.com',
-    description='The OAS_wrapper package provides functionalities to get basic statistics and visualizations for the OAS dataset of interest. In addition, the actual V/D/J sequencese are mapped from the IMGT database for a query sequence of interest.',
+    description='Python package to parse Observed antibody sequence data for easy reporting, visualization, annotation and alignment.',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     url='https://github.com/sridhara-omics/OAS_wrapper',
