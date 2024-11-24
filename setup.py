@@ -5,7 +5,7 @@ setup(
     version='1.0',
     packages=find_packages(),
     install_requires=[
-        'numpy',
+        'numpy<2',
         'scipy',
         'pandas',
         'matplotlib',
