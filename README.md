@@ -5,8 +5,10 @@ A wrapper to parse Observed Antibody Space (OAS) data for better visualization, 
 
 The scripts include functionalities to:
 1. Provide basic metrics and visualizations of sequences and their annotations
-2. Provide original IMGT sequences for V, D and J calls made in OAS data using IMGT reference database
-3. Align sequence and germline to highlight regions of mismatches, providing positional information e.g.,  
+   ![image](https://github.com/user-attachments/assets/ebcf2891-23fb-423a-beb6-3149e6279085)
+
+3. Provide original IMGT sequences for V, D and J calls made in OAS data using IMGT reference database
+4. Align sequence and germline to highlight regions of mismatches, providing positional information e.g.,  
 ```
 Example Output:
 Original Sequence 1: GAGGTGCAGCTGTTGGAGTCTGGGGGAGGCTTAGTACAGCCTGGGGGGTCCCTGAGACTCTCCTGTGTAGCCTCTGGATTCACCTTTAGCAGCTATGCCATGAGCTGGGTCCGCCAGGCTCCAGGGAAGGGGCTGGAGTGGGTCTCAGGTATTAGTGCTAGTGGTGCTAGCACATACTACGCAGACTCCGTGAAGGGCCGGTTCACCATCTCCAGAGACAATTCCAAGAACACGCTGTATCTGCAAATGAACAGCCTGAGAGCCGAGGACACGGCCGTATATTACTGTGCGAAAACCCCCAAATACGATGTTTGGAGTGGTTATTATACGTCCAATGCCTTTGATATCTGGGGCCAAGGGACAATGGTCACCGTCTCTTCAG
