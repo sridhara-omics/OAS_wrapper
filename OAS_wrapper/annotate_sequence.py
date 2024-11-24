@@ -57,18 +57,18 @@ def get_annotations(row):
                 annotations[region_name] = (int(row[start_col]), int(row[end_col]))
     return annotations
 
-def annotate_from_csv(data_unit_file):
+def annotate_from_csv(data_unit_file, sequence_col):
     """Annotate sequences based on regions from a CSV file."""
     # Read the CSV file
     df = pd.read_csv(data_unit_file, low_memory=False, skiprows=1)
 
-    # Check for mandatory Sequence column
-    if "Sequence" not in df.columns:
-        raise ValueError("CSV file must contain a 'Sequence' column.")
+    # Check for mandatory sequence column
+    if sequence_col not in df.columns:
+        raise ValueError(f"CSV file must contain a '{sequence_col}' column.")
 
     # Process each row
     for index, row in df.iterrows():
-        sequence = row['Sequence']
+        sequence = row[sequence_col]
 
         # Extract annotation regions dynamically
         annotations = get_annotations(row)
@@ -84,4 +84,5 @@ def annotate_from_csv(data_unit_file):
 
 """ # Example usage
 csv_file = "sequence_annotations.csv"  # Replace with your CSV file path
-annotate_from_csv(csv_file) """
+sequence_column = "Sequence"  # Replace with the column name in your CSV
+annotate_from_csv(csv_file, sequence_column) """
