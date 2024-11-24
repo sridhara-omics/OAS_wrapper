@@ -1,27 +1,29 @@
 import pandas as pd
 
-def process_germline_mappings_with_calls(data_unit_file, output_csv):
+def process_germline_mappings_with_calls(data_unit_file, required_columns):
     """
-    Process germline mappings from a CSV file and generate a new CSV file with 
+    Process germline mappings from a CSV file and generate a DataFrame with 
     germline, the number of sequences mapped, and sequences, while preserving 
-    'v_call', 'd_call', 'j_call', and other columns.
+    specified columns.
     
     Parameters:
-        input_csv (str): Path to the input CSV file containing 'sequence', 'germline',
-                         'v_call', 'd_call', and 'j_call' columns.
-        output_csv (str): Path to the output CSV file to save the processed data.
+        data_unit_file (str): Path to the input CSV file containing the data.
+        required_columns (set): A set of required column names to ensure are present
+                                in the input data (e.g., {"sequence", "germline", "v_call"}).
+    
+    Returns:
+        pd.DataFrame: Processed data as a DataFrame.
     """
     # Read the input CSV
     df = pd.read_csv(data_unit_file, low_memory=False, skiprows=1)
     
     # Validate that necessary columns exist
-    required_columns = {"sequence", "germline", "v_call", "d_call", "j_call"}
     if not required_columns.issubset(df.columns):
         missing = required_columns - set(df.columns)
         raise ValueError(f"Input CSV must contain the following columns: {', '.join(missing)}")
     
     # Preserve additional columns
-    other_columns = [col for col in df.columns if col not in {"sequence", "germline", "v_call", "d_call", "j_call"}]
+    other_columns = [col for col in df.columns if col not in required_columns]
 
     # Group by germline and count sequences
     grouped = df.groupby("germline")["sequence"].apply(list).reset_index()
@@ -34,15 +36,15 @@ def process_germline_mappings_with_calls(data_unit_file, output_csv):
     result = result.merge(df, on=["germline", "sequence"], how="left").drop_duplicates()
 
     # Rearrange columns for clarity
-    final_columns = ["germline", "number_of_sequences", "sequence", "v_call", "d_call", "j_call"] + other_columns
+    final_columns = ["germline", "number_of_sequences", "sequence"] + list(required_columns - {"germline", "sequence"}) + other_columns
     result = result[final_columns]
 
-    # Save to the output CSV
-    result.to_csv(output_csv, index=False)
-    print(f"Processed data saved to {output_csv}")
+    # Return the DataFrame
+    return result
 
 """ # Example usage
-input_csv = "germline_sequences_with_calls.csv"
-output_csv = "processed_germline_mappings_with_calls.csv"
-process_germline_mappings_with_calls(input_csv, output_csv)
+data_unit_file = "germline_sequences_with_calls.csv"
+required_columns = {"sequence", "germline", "v_call", "d_call", "j_call"}
+processed_df = process_germline_mappings_with_calls(data_unit_file, required_columns)
+print(processed_df.head())
  """
