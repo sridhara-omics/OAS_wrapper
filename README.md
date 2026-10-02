@@ -14,7 +14,7 @@ format (they use short toy sequences for illustration).
 | Grouping by germline | A table per germline with the sequence count and the V, D and J annotations (and per-sequence fields such as quality and source) |
 | CDR/FWR annotation | The sequence split into complementarity-determining and framework regions for quick inspection |
 
-## Informatio on Outputs of Functionalities
+## Information on Outputs of Functionalities
 
 The scripts include functionalities to:
 1. Provide basic metrics and visualizations of sequences and their annotations
