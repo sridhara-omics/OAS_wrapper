@@ -1,5 +1,10 @@
 # OAS_wrapper
-A wrapper to parse Observed Antibody Space (OAS) data for better visualization, annotation and comparison of sequence to germline.
+
+**Antibody sequence analysis made easy, with tools for parsing, annotation, alignment, visualization, and reporting of Observed Antibody Space (OAS) data.**
+
+[PyPI](https://pypi.org/project/OAS-wrapper/) [Python](https://www.python.org/) [License: MIT]  
+
+This tool is a wrapper to parse Observed Antibody Space (OAS) data for better visualization, annotation and comparison of sequence to germline.
 
 ## What each functionality returns
 
